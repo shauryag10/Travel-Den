@@ -1,13 +1,11 @@
 "use client";
 
-import { AnimatePresence, motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { Minus, Plus } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import CinematicMedia from "@/components/ui/Media";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { processSteps } from "@/lib/content";
-import { useIsDesktop } from "@/lib/hooks";
-import { EASE } from "@/lib/motion";
 
 /**
  * "How we design your journey".
@@ -22,7 +20,6 @@ export default function Process() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const [active, setActive] = useState(0);
   const [openStep, setOpenStep] = useState(0);
-  const isDesktop = useIsDesktop();
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -58,24 +55,27 @@ export default function Process() {
           <div className="hidden lg:col-span-5 lg:block">
             <div className="sticky top-28">
               <div className="relative aspect-[4/5] overflow-hidden">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={processSteps[active].number}
-                    initial={{ opacity: 0, scale: 1.04 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 1, ease: EASE }}
-                    className="absolute inset-0"
+                {/* All four stills stay mounted and simply cross-fade —
+                    nothing to lazy-load at the moment of switching, so the
+                    panel is never blank. */}
+                {processSteps.map((step, i) => (
+                  <div
+                    key={step.number}
+                    aria-hidden={active !== i}
+                    className={`absolute inset-0 transition-[opacity,transform] duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                      active === i
+                        ? "scale-100 opacity-100"
+                        : "scale-[1.04] opacity-0"
+                    }`}
                   >
                     <CinematicMedia
-                      media={processSteps[active].media}
-                      playback="auto"
-                      drift
+                      media={step.media}
+                      playback="never"
                       sizes="40vw"
                       className="h-full w-full"
                     />
-                  </motion.div>
-                </AnimatePresence>
+                  </div>
+                ))}
 
                 <div
                   aria-hidden="true"
@@ -211,10 +211,10 @@ function StepRow({
       ([entry]) => {
         if (entry.isIntersecting) onEnter();
       },
-      // A band in the upper-middle of the viewport: steps take over the
-      // pinned panel slightly early, so the last one switches in while the
-      // panel is still pinned rather than after it starts leaving.
-      { rootMargin: "-30% 0px -55% 0px", threshold: 0 },
+      // A band in the lower third of the viewport: a step claims the pinned
+      // panel almost as soon as it scrolls into reading range, so the photo
+      // is already up well before the step's text reaches eye level.
+      { rootMargin: "-50% 0px -30% 0px", threshold: 0 },
     );
     io.observe(el);
     return () => io.disconnect();

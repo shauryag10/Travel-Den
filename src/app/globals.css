@@ -1,0 +1,271 @@
+@import "tailwindcss";
+
+/* ============================================================
+   TRAVEL DEN — DESIGN TOKENS
+   Tailwind v4 theme. Every token here is exposed both as a
+   Tailwind utility (bg-navy, text-gold…) and as a raw CSS var
+   (var(--color-navy)) for use inside gradients / canvas / SVG.
+   ============================================================ */
+@theme {
+  /* Official palette — TRAVEL DEN brand deck (Club for Creatives, 2025).
+     Deep Midnight Blue is primary; blue-green + sage are sparing accents;
+     the two beiges are the warm neutrals. Gold is a web-only detail kept
+     deliberately quiet. */
+  --color-navy: #101d45;
+  --color-navy-deep: #0a1330;
+  --color-ivory: #f4f0e6;
+  --color-ivory-warm: #ece6d8;
+  --color-bluegrey: #a4b8b6;
+  --color-sage: #66837c;
+  --color-beige: #dfd8cc;
+  --color-charcoal: #191919;
+  --color-gold: #c5a96a;
+
+  --font-serif: var(--font-display), "Cormorant Garamond", "Times New Roman", serif;
+  --font-sans: var(--font-body), "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  /* Section rhythm derived from the reference: generous, consistent, unhurried. */
+  --spacing-section: 9.5rem;
+  --spacing-section-sm: 5.5rem;
+
+  --ease-den: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-drift: drift 26s var(--ease-den) infinite alternate;
+  --animate-grain: grain 8s steps(6) infinite;
+}
+
+@keyframes drift {
+  from {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.14) translate3d(-1.5%, -1.5%, 0);
+  }
+}
+
+@keyframes grain {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  20% {
+    transform: translate(-3%, 2%);
+  }
+  40% {
+    transform: translate(2%, -4%);
+  }
+  60% {
+    transform: translate(-2%, -2%);
+  }
+  80% {
+    transform: translate(3%, 3%);
+  }
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+@layer base {
+  * {
+    border-color: color-mix(in srgb, var(--color-beige) 60%, transparent);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  /* Lenis drives scroll; disable native smooth so the two don't fight. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  html.lenis {
+    scroll-behavior: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-charcoal);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-gold) 45%, transparent);
+    color: var(--color-navy);
+  }
+
+  /* Visible, on-brand focus ring for keyboard users only. */
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  blockquote {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    letter-spacing: -0.015em;
+  }
+
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* ============================================================
+   COMPONENT-LEVEL UTILITIES
+   ============================================================ */
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+/* Oversized editorial display type. Fluid across the whole range so we
+   never need per-breakpoint font sizes. */
+@utility display-xl {
+  font-size: clamp(3.25rem, 8.2vw, 8rem);
+  line-height: 0.94;
+  letter-spacing: -0.025em;
+}
+
+@utility display-lg {
+  font-size: clamp(2.5rem, 5.4vw, 4.75rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+@utility display-md {
+  font-size: clamp(1.75rem, 3.1vw, 2.75rem);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+}
+
+@utility body-copy {
+  font-size: clamp(0.9375rem, 1.05vw, 1.0625rem);
+  line-height: 1.75;
+  letter-spacing: 0.005em;
+}
+
+/* Thin rule used between nav items, pillars and footer blocks. */
+@utility hairline {
+  background: color-mix(in srgb, currentColor 18%, transparent);
+}
+
+/* ============================================================
+   MOTION PRIMITIVES (CSS-only where JS isn't required)
+   ============================================================ */
+
+/* Masked line reveal — the parent clips, the child slides up. */
+.line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+/* Animated underline used on all inline text links. */
+.link-underline {
+  position: relative;
+  display: inline-block;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.28em;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.55s var(--ease-den);
+}
+.link-underline:hover::after,
+.link-underline:focus-visible::after,
+.link-underline[data-active="true"]::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Persistent underline (nav active state) sits flush under the label. */
+.link-underline[data-active="true"]::after {
+  transition-duration: 0.45s;
+}
+
+/* Film grain overlay — one repeating SVG turbulence, GPU-cheap. */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  pointer-events: none;
+  opacity: 0.16;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  animation: var(--animate-grain);
+}
+
+/* Ken Burns drift applied to hero/CTA stills when video is absent. */
+.drift {
+  animation: var(--animate-drift);
+  will-change: transform;
+}
+
+/* Horizontal scrollers: hide the bar, keep the scrolling. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.drag-cursor {
+  cursor: grab;
+}
+.drag-cursor:active {
+  cursor: grabbing;
+}
+
+/* ============================================================
+   REDUCED MOTION
+   Everything degrades to a static, fully-readable page.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .drift,
+  .grain::after {
+    animation: none !important;
+  }
+
+  .link-underline::after {
+    transition: none;
+  }
+}

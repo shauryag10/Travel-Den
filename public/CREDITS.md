@@ -1,0 +1,42 @@
+# Media credits
+
+All photography and footage sourced from Pexels (https://www.pexels.com/license/).
+
+- images/hero/amalfi.jpg — https://www.pexels.com/photo/19900429/
+- images/hero/cappadocia.jpg — https://www.pexels.com/photo/27260270/
+- images/hero/maldives.jpg — https://www.pexels.com/photo/9215862/
+- images/intro/thoughtful.jpg — https://www.pexels.com/photo/15868531/
+- images/intro/places.jpg — https://www.pexels.com/photo/16563684/
+- images/intro/journeys.jpg — https://www.pexels.com/photo/9489813/
+- images/ambient/leisure.jpg — https://www.pexels.com/photo/32996880/
+- images/ambient/luxury.jpg — https://www.pexels.com/photo/7974839/
+- images/ambient/itineraries.jpg — https://www.pexels.com/photo/19374336/
+- images/ambient/meaningful.jpg — https://www.pexels.com/photo/30243266/
+- images/destinations/greece.jpg — https://www.pexels.com/photo/6604254/
+- images/destinations/maldives.jpg — https://www.pexels.com/photo/3293192/
+- images/destinations/switzerland.jpg — https://www.pexels.com/photo/20385882/
+- images/destinations/morocco.jpg — https://www.pexels.com/photo/10573397/
+- images/destinations/japan.jpg — https://www.pexels.com/photo/26946364/
+- images/destinations/south-africa.jpg — https://www.pexels.com/photo/6480227/
+- images/experiences/island.jpg — https://www.pexels.com/photo/37943870/
+- images/experiences/culinary.jpg — https://www.pexels.com/photo/7627408/
+- images/experiences/europe.jpg — https://www.pexels.com/photo/12464291/
+- images/experiences/wildlife.jpg — https://www.pexels.com/photo/13464512/
+- images/experiences/celebration.jpg — https://www.pexels.com/photo/5864590/
+- images/experiences/wellness.jpg — https://www.pexels.com/photo/8680942/
+- images/process/discover.jpg — https://www.pexels.com/photo/4645982/
+- images/process/curate.jpg — https://www.pexels.com/photo/12582580/
+- images/process/refine.jpg — https://www.pexels.com/photo/27195926/
+- images/process/escape.jpg — https://www.pexels.com/photo/34358440/
+- images/cta/escape.jpg — https://www.pexels.com/photo/18946915/
+- videos/hero/amalfi.mp4 — https://www.pexels.com/video/27642735/
+- videos/hero/cappadocia.mp4 — https://www.pexels.com/video/27436406/
+- videos/hero/maldives.mp4 — https://www.pexels.com/video/4730814/
+- videos/destinations/greece.mp4 — https://www.pexels.com/video/32350539/
+- videos/destinations/maldives.mp4 — https://www.pexels.com/video/8356772/
+- videos/destinations/switzerland.mp4 — https://www.pexels.com/video/33245569/
+- videos/destinations/morocco.mp4 — https://www.pexels.com/video/5442766/
+- videos/destinations/japan.mp4 — https://www.pexels.com/video/32111755/
+- videos/destinations/south-africa.mp4 — https://www.pexels.com/video/12596723/
+- videos/cta/escape.mp4 — https://www.pexels.com/video/32760159/
+- images/founder/dev-sodha.jpg — supplied by Travel Den (founder photo)

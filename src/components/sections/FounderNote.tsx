@@ -16,18 +16,20 @@ export default function FounderNote() {
     <section className="relative z-10 bg-ivory py-(--spacing-section-sm) md:py-(--spacing-section)">
       <div className="mx-auto max-w-[100rem] px-6 md:px-10">
         <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-20">
-          {/* -------------------------------------------------- media side */}
-          <Reveal variant="clip" className="lg:col-span-5">
+          {/* Media side — no scroll-reveal here: the founder's photo should
+              simply be there when the section arrives. */}
+          <div className="lg:col-span-5">
             <div className="relative aspect-[4/5] overflow-hidden lg:aspect-[3/4]">
               <CinematicMedia
                 media={founderMedia}
                 playback="never"
+                priority
                 sizes="(max-width: 1024px) 100vw, 40vw"
                 className="h-full w-full"
                 objectPosition="center 22%"
               />
             </div>
-          </Reveal>
+          </div>
 
           {/* --------------------------------------------------- note side */}
           <div className="lg:col-span-7 lg:pr-10 xl:pr-24">

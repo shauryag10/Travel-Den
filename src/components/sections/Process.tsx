@@ -107,9 +107,9 @@ export default function Process() {
               className="absolute left-0 top-0 h-full w-px origin-top bg-navy"
             />
 
-            {/* Bottom runway lets the final step activate while the pinned
-                panel is still fully in view instead of sliding out early. */}
-            <ol className="lg:pb-[32vh]">
+            {/* Small runway so the final step can activate while the pinned
+                panel is still in view — kept tight to avoid a dead gap. */}
+            <ol className="lg:pb-[10vh]">
               {processSteps.map((step, i) => (
                 <StepRow
                   key={step.number}

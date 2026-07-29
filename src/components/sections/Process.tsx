@@ -18,8 +18,41 @@ import { processSteps } from "@/lib/content";
  */
 export default function Process() {
   const sectionRef = useRef<HTMLElement | null>(null);
+  const listRef = useRef<HTMLOListElement | null>(null);
   const [active, setActive] = useState(0);
   const [openStep, setOpenStep] = useState(0);
+
+  /* Which step owns the pinned panel: the LAST row whose top has crossed a
+     line 65% down the viewport. One deterministic calculation per frame —
+     unlike per-row IntersectionObservers, callbacks can't race each other,
+     so a fast scroll can never skip a step or land on the wrong photo. */
+  useEffect(() => {
+    let raf = 0;
+    const compute = () => {
+      raf = 0;
+      const rows = listRef.current?.querySelectorAll<HTMLLIElement>(
+        ":scope > li",
+      );
+      if (!rows?.length) return;
+      const line = window.innerHeight * 0.65;
+      let idx = 0;
+      rows.forEach((row, i) => {
+        if (row.getBoundingClientRect().top <= line) idx = i;
+      });
+      setActive((prev) => (prev === idx ? prev : idx));
+    };
+    const schedule = () => {
+      if (!raf) raf = requestAnimationFrame(compute);
+    };
+    compute();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -109,14 +142,9 @@ export default function Process() {
 
             {/* Small runway so the final step can activate while the pinned
                 panel is still in view — kept tight to avoid a dead gap. */}
-            <ol className="lg:pb-[10vh]">
+            <ol ref={listRef} className="lg:pb-[10vh]">
               {processSteps.map((step, i) => (
-                <StepRow
-                  key={step.number}
-                  step={step}
-                  isActive={active === i}
-                  onEnter={() => setActive(i)}
-                />
+                <StepRow key={step.number} step={step} isActive={active === i} />
               ))}
             </ol>
           </div>
@@ -196,32 +224,12 @@ export default function Process() {
 function StepRow({
   step,
   isActive,
-  onEnter,
 }: {
   step: (typeof processSteps)[number];
   isActive: boolean;
-  onEnter: () => void;
 }) {
-  const ref = useRef<HTMLLIElement | null>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) onEnter();
-      },
-      // A band in the lower third of the viewport: a step claims the pinned
-      // panel almost as soon as it scrolls into reading range, so the photo
-      // is already up well before the step's text reaches eye level.
-      { rootMargin: "-50% 0px -30% 0px", threshold: 0 },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [onEnter]);
-
   return (
-    <li ref={ref} className="relative pl-10 xl:pl-14">
+    <li className="relative pl-10 xl:pl-14">
       {/* Node on the rule */}
       <span
         aria-hidden="true"

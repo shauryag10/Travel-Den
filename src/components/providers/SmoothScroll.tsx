@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { MotionConfig } from "motion/react";
 import { usePrefersReducedMotion } from "@/lib/hooks";
 
 /**
@@ -12,6 +13,11 @@ import { usePrefersReducedMotion } from "@/lib/hooks";
  *
  * Skipped entirely when the user prefers reduced motion — native scrolling
  * is left untouched, which is both faster and what they asked for.
+ *
+ * Also the site's MotionConfig host. The reduced-motion block in globals.css
+ * only reaches CSS transitions; Motion animates inline styles from JS and
+ * needs telling separately, which `reducedMotion="user"` does — transform and
+ * layout movement is dropped, opacity fades survive so nothing appears blank.
  */
 export default function SmoothScroll({
   children,
@@ -69,5 +75,5 @@ export default function SmoothScroll({
     };
   }, [reduced]);
 
-  return <>{children}</>;
+  return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
 }

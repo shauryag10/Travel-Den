@@ -51,7 +51,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#11214a",
+  themeColor: "#101d45",
   width: "device-width",
   initialScale: 1,
 };
@@ -64,6 +64,25 @@ export default function RootLayout({
       lang="en"
       className={`${displayFont.variable} ${bodyFont.variable} ${scriptFont.variable}`}
     >
+      <head>
+        {/*
+          Entrance animations render their `initial` state into the HTML, so
+          without JS ~40 elements would ship at opacity:0 and the page would
+          read as blank. This restores them. The `opacity:0;` match is
+          deliberately semicolon-anchored so it never catches a deliberate
+          partial opacity such as the hero veil's `opacity:0.42`.
+        */}
+        <noscript>
+          <style>{`
+            [style*="opacity:0;"],
+            [style$="opacity:0"] {
+              opacity: 1 !important;
+              transform: none !important;
+              clip-path: none !important;
+            }
+          `}</style>
+        </noscript>
+      </head>
       <body>
         {/* Skip link for keyboard users — first tab stop on the page. */}
         <a

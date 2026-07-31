@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import type { ReactNode } from "react";
 import { useRef } from "react";
 import { useHasHover, usePrefersReducedMotion } from "@/lib/hooks";

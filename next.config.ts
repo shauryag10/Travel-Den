@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
     deviceSizes: [420, 640, 828, 1080, 1280, 1600, 1920, 2560],
   },
   experimental: {
-    optimizePackageImports: ["lucide-react", "framer-motion"],
+    optimizePackageImports: ["lucide-react", "motion"],
   },
 };
 

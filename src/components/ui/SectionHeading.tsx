@@ -39,7 +39,7 @@ export default function SectionHeading({
         <Reveal>
           <p
             className={`eyebrow mb-7 ${
-              isLight ? "text-bluegrey" : "text-sage"
+              isLight ? "text-bluegrey" : "text-sage-deep"
             }`}
           >
             {eyebrow}

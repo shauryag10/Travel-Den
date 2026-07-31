@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion, useScroll, useSpring } from "motion/react";
 
 /** Hairline gold progress rule pinned to the very top of the viewport. */
 export default function ScrollProgress() {

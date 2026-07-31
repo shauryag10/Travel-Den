@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { motion } from "motion/react";
+import { ArrowRight, Check } from "lucide-react";
 import { useState } from "react";
 import Logo from "@/components/brand/Logo";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
@@ -19,7 +19,7 @@ export default function Footer() {
             <p className="mt-6 font-serif text-lg italic text-bluegrey">
               {site.tagline}
             </p>
-            <p className="eyebrow mt-3 text-[0.5625rem] text-bluegrey/60">
+            <p className="eyebrow mt-3 text-[0.5625rem] text-bluegrey/75">
               The World, Curated
             </p>
             <RouteLine />
@@ -30,12 +30,12 @@ export default function Footer() {
             <p className="eyebrow mb-7 text-[0.5625rem] text-bluegrey/70">
               Explore
             </p>
-            <ul className="space-y-3.5">
+            <ul className="-my-1.5">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="link-underline text-[0.875rem] text-ivory/80"
+                    className="link-underline inline-flex min-h-11 items-center text-[0.875rem] text-ivory/80"
                   >
                     {link.label}
                   </a>
@@ -49,18 +49,24 @@ export default function Footer() {
             <p className="eyebrow mb-7 text-[0.5625rem] text-bluegrey/70">
               Travel enquiries
             </p>
-            <ul className="space-y-3.5 text-[0.875rem] text-ivory/80">
+            <ul className="-my-1.5 text-[0.875rem] text-ivory/80">
               <li>
-                <a href={site.contact.phoneHref} className="link-underline">
+                <a
+                  href={site.contact.phoneHref}
+                  className="link-underline inline-flex min-h-11 items-center"
+                >
                   {site.contact.phone}
                 </a>
               </li>
               <li>
-                <a href={site.contact.emailHref} className="link-underline">
+                <a
+                  href={site.contact.emailHref}
+                  className="link-underline inline-flex min-h-11 items-center"
+                >
                   {site.contact.email}
                 </a>
               </li>
-              <li className="pt-2 leading-relaxed text-ivory/55">
+              <li className="pt-3 leading-relaxed text-ivory/55">
                 {site.contact.address.line1}
                 <br />
                 {site.contact.address.line2}
@@ -79,14 +85,14 @@ export default function Footer() {
               A quieter way to discover the world.
             </p>
             <NewsletterForm />
-            <ul className="mt-9 flex gap-6">
+            <ul className="mt-7 flex gap-6">
               {site.social.map((social) => (
                 <li key={social.label}>
                   <a
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="link-underline eyebrow text-[0.5625rem] text-ivory/60"
+                    className="link-underline eyebrow inline-flex min-h-11 items-center text-[0.5625rem] text-ivory/60"
                   >
                     {social.label}
                   </a>
@@ -98,15 +104,15 @@ export default function Footer() {
 
         {/* ------------------------------------------------------- legal */}
         <Reveal className="mt-20">
-          <div className="flex flex-col gap-4 border-t border-white/10 pt-7 text-[0.6875rem] text-ivory/40 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-4 border-t border-white/10 pt-7 text-[0.6875rem] text-ivory/60 sm:flex-row sm:items-center sm:justify-between">
             <p>
               © {new Date().getFullYear()} {site.name}. All rights reserved.
             </p>
-            <div className="flex gap-7">
-              <a href="#top" className="link-underline">
+            <div className="-my-2 flex gap-7">
+              <a href="#top" className="link-underline inline-flex min-h-11 items-center">
                 Privacy Policy
               </a>
-              <a href="#top" className="link-underline">
+              <a href="#top" className="link-underline inline-flex min-h-11 items-center">
                 Terms
               </a>
             </div>
@@ -127,7 +133,7 @@ function RouteLine() {
       viewBox="0 0 220 48"
       fill="none"
       aria-hidden="true"
-      className="mt-10 w-52 text-bluegrey/50"
+      className="mt-10 w-52 text-bluegrey/70"
       initial="hidden"
       whileInView="show"
       viewport={inView}
@@ -168,50 +174,93 @@ function RouteLine() {
  */
 function NewsletterForm() {
   const [email, setEmail] = useState("");
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle",
+  );
+
+  const isSent = status === "sent";
+  const isSending = status === "sending";
+  const isError = status === "error";
+
+  // Validated here rather than left to the browser so the wording matches the
+  // rest of the site's voice and is announced politely on submit.
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (isSending || isSent) return;
+
+    const value = email.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) {
+      setStatus("error");
+      return;
+    }
+
+    setStatus("sending");
+    // TODO: POST `value` to your newsletter provider, then setStatus("sent")
+    // on success or setStatus("error") on failure.
+    window.setTimeout(() => setStatus("sent"), 600);
+  };
 
   return (
-    <form
-      className="mt-7"
-      onSubmit={(e) => {
-        e.preventDefault();
-        if (!email) return;
-        // TODO: POST to your newsletter provider here.
-        setSent(true);
-      }}
-    >
+    <form className="mt-7" onSubmit={submit} noValidate>
       <label htmlFor="newsletter-email" className="sr-only">
         Email address
       </label>
-      <div className="flex border-b border-white/25 transition-colors duration-500 focus-within:border-gold">
+      <div
+        className={`flex items-center border-b transition-colors duration-500 ${
+          isError
+            ? "border-gold"
+            : isSent
+              ? "border-bluegrey/40"
+              : "border-white/25 focus-within:border-gold"
+        }`}
+      >
         <input
           id="newsletter-email"
           type="email"
-          required
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          disabled={isSent || isSending}
+          aria-invalid={isError}
+          aria-describedby="newsletter-status"
+          onChange={(e) => {
+            setEmail(e.target.value);
+            if (isError) setStatus("idle");
+          }}
           placeholder="Your email address"
-          className="w-full bg-transparent py-3.5 text-[0.875rem] text-ivory placeholder:text-ivory/35 focus:outline-none"
+          className="w-full bg-transparent py-3.5 text-[0.875rem] text-ivory transition-opacity duration-500 placeholder:text-ivory/60 focus:outline-none disabled:opacity-45"
         />
         <button
           type="submit"
-          aria-label="Subscribe"
-          className="group px-2.5 text-ivory/70 transition-colors duration-300 hover:text-gold"
+          disabled={isSent || isSending}
+          aria-label={isSent ? "Subscribed" : "Subscribe"}
+          className="group inline-flex min-h-11 w-11 shrink-0 items-center justify-center text-ivory/70 transition-colors duration-300 hover:text-gold disabled:pointer-events-none disabled:opacity-45"
         >
-          <ArrowRight
-            className="h-4 w-4 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1"
-            strokeWidth={1.5}
-            aria-hidden="true"
-          />
+          {isSent ? (
+            <Check className="h-4 w-4" strokeWidth={1.5} aria-hidden="true" />
+          ) : (
+            <ArrowRight
+              className={`h-4 w-4 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1 ${
+                isSending ? "translate-x-1 opacity-60" : ""
+              }`}
+              strokeWidth={1.5}
+              aria-hidden="true"
+            />
+          )}
         </button>
       </div>
+
+      {/* Height is reserved so the footer never shifts as the state changes. */}
       <p
+        id="newsletter-status"
         aria-live="polite"
-        className={`mt-3 text-[0.75rem] text-gold transition-opacity duration-500 ${
-          sent ? "opacity-100" : "opacity-0"
-        }`}
+        className={`mt-3 min-h-[1.25rem] text-[0.75rem] transition-opacity duration-500 ${
+          isSent || isError ? "opacity-100" : "opacity-0"
+        } ${isError ? "text-gold" : "text-bluegrey"}`}
       >
-        {sent ? "Thank you — you're on the list." : " "}
+        {isError
+          ? "That address doesn't look right — please check it."
+          : isSent
+            ? "Thank you — you're on the list."
+            : " "}
       </p>
     </form>
   );

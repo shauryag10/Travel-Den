@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import CinematicMedia from "@/components/ui/Media";
@@ -48,7 +48,7 @@ export default function Intro() {
             <Reveal delay={0.25}>
               <a
                 href="#services"
-                className="group mt-11 inline-flex items-center gap-3 eyebrow text-[0.625rem] text-navy"
+                className="group mt-9 inline-flex min-h-11 items-center gap-3 eyebrow text-[0.625rem] text-navy"
               >
                 <span className="link-underline">Know our story</span>
                 <ArrowRight
@@ -110,7 +110,7 @@ export default function Intro() {
                       <h3 className="font-serif text-[1.35rem] leading-snug text-navy">
                         {card.title}
                       </h3>
-                      <p className="mt-1.5 text-[0.8125rem] text-charcoal/55">
+                      <p className="mt-1.5 text-[0.8125rem] text-charcoal/70">
                         {card.line}
                       </p>
                     </div>

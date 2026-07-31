@@ -21,6 +21,14 @@
   --color-charcoal: #191919;
   --color-gold: #c5a96a;
 
+  /* Text-safe siblings of the two accents. The brand values above are tuned
+     for fills and large marks; at label sizes they sit near 3.6:1 and 2:1 on
+     the beiges. These carry the same hue past 4.5:1 so small type on a light
+     surface stays legible — accent colour on dark surfaces still uses the
+     brand values, which clear the bar comfortably there. */
+  --color-sage-deep: #526963;
+  --color-gold-deep: #74643f;
+
   --font-serif: var(--font-display), "Cormorant Garamond", "Times New Roman", serif;
   --font-sans: var(--font-body), "Manrope", ui-sans-serif, system-ui, sans-serif;
 

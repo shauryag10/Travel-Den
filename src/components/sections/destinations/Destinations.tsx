@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import CinematicMedia from "@/components/ui/Media";
@@ -182,7 +182,7 @@ export default function Destinations() {
         </Reveal>
 
         <div className="mx-auto mt-8 max-w-[100rem] px-6 md:px-10">
-          <p className="eyebrow text-[0.5rem] text-ivory/45">
+          <p className="eyebrow text-[0.5rem] text-ivory/60">
             <span className="lg:hidden">Swipe to browse</span>
             <span className="hidden lg:inline">
               Drag to browse — select a destination to preview

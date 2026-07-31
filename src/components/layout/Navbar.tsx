@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 import { useState } from "react";
 import { Menu } from "lucide-react";
 import Logo from "@/components/brand/Logo";
@@ -101,7 +101,7 @@ export default function Navbar() {
               <Magnetic
                 href="#contact"
                 strength={6}
-                className={`hidden items-center overflow-hidden px-7 py-3.5 eyebrow text-[0.625rem] transition-colors duration-500 sm:inline-flex ${
+                className={`hidden min-h-11 items-center overflow-hidden px-7 py-4 eyebrow text-[0.625rem] transition-colors duration-500 sm:inline-flex ${
                   onLight
                     ? "bg-navy text-ivory hover:bg-navy-deep"
                     : "bg-navy text-ivory hover:bg-ivory hover:text-navy"
@@ -116,7 +116,7 @@ export default function Navbar() {
                 aria-label="Open menu"
                 aria-expanded={menuOpen}
                 aria-controls="mobile-menu"
-                className="inline-flex items-center gap-2.5 p-2 lg:hidden"
+                className="-mr-2 inline-flex min-h-11 items-center gap-2.5 p-2 lg:hidden"
               >
                 <span className="eyebrow hidden text-[0.625rem] sm:inline">
                   Menu

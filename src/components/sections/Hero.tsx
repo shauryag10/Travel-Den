@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useTransform } from "motion/react";
 import { ArrowRight, MapPin, Pause, Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import CinematicMedia from "@/components/ui/Media";
@@ -95,6 +95,13 @@ export default function Hero() {
         <div
           aria-hidden="true"
           className="absolute inset-0 bg-gradient-to-b from-navy-deep/70 via-transparent to-navy-deep/85"
+        />
+        {/* The vertical gradient is transparent through its middle — which is
+            exactly where the copy sits. This left-anchored scrim carries the
+            type over a bright frame while leaving the right of the photo open. */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-r from-navy-deep/80 via-navy-deep/35 to-transparent lg:via-navy-deep/20"
         />
 
         <CursorGlow />
@@ -250,7 +257,7 @@ export default function Hero() {
                 ? "Play background footage"
                 : "Pause background footage"
             }
-            className="inline-flex h-9 w-9 items-center justify-center border border-ivory/30 text-ivory/80 transition-colors duration-500 hover:border-ivory/70 hover:text-ivory"
+            className="inline-flex h-11 w-11 items-center justify-center border border-ivory/30 text-ivory/80 transition-colors duration-500 hover:border-ivory/70 hover:text-ivory"
           >
             {paused ? (
               <Play className="h-3.5 w-3.5" strokeWidth={1.5} aria-hidden="true" />

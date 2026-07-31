@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "motion/react";
 import { MessageCircle } from "lucide-react";
 import { useRef, useState } from "react";
 import CinematicMedia from "@/components/ui/Media";
@@ -88,20 +88,20 @@ export default function FinalCta() {
 
           {/* Contact details, quiet and small */}
           <Reveal delay={0.45}>
-            <div className="mt-16 flex flex-col gap-2.5 border-t border-white/12 pt-8 text-[0.8125rem] text-bluegrey/85 sm:flex-row sm:flex-wrap sm:gap-x-10">
+            <div className="mt-16 flex flex-col gap-1 border-t border-white/12 pt-6 text-[0.8125rem] text-bluegrey/85 sm:flex-row sm:flex-wrap sm:gap-x-10">
               <a
                 href={site.contact.phoneHref}
-                className="link-underline w-fit"
+                className="link-underline inline-flex min-h-11 w-fit items-center"
               >
                 {site.contact.phone}
               </a>
               <a
                 href={site.contact.emailHref}
-                className="link-underline w-fit"
+                className="link-underline inline-flex min-h-11 w-fit items-center"
               >
                 {site.contact.email}
               </a>
-              <span className="text-bluegrey/60">
+              <span className="text-bluegrey/75">
                 {site.contact.address.line1}, {site.contact.address.line2},{" "}
                 {site.contact.address.line3}
               </span>
@@ -123,7 +123,7 @@ function SwapLabelButton() {
   return (
     <Magnetic
       href={site.contact.emailHref}
-      className="bg-ivory px-9 py-4 text-navy transition-colors duration-500 hover:bg-gold"
+      className="inline-flex min-h-11 items-center bg-ivory px-9 py-4 text-navy transition-colors duration-500 hover:bg-gold"
       ariaLabel="Start planning — email Travel Den"
     >
       <span

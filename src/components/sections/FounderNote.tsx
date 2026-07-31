@@ -34,9 +34,9 @@ export default function FounderNote() {
           {/* --------------------------------------------------- note side */}
           <div className="lg:col-span-7 lg:pr-10 xl:pr-24">
             <Reveal>
-              <p className="eyebrow flex items-center gap-4 text-sage">
+              <p className="eyebrow flex items-center gap-4 text-sage-deep">
                 A note from the founder
-                <Spark className="h-2.5 w-2.5 text-gold" />
+                <Spark className="h-2.5 w-2.5 text-gold-deep" />
               </p>
             </Reveal>
 
@@ -67,7 +67,7 @@ export default function FounderNote() {
                 >
                   {site.founder.name}
                 </p>
-                <p className="eyebrow pb-1.5 text-[0.5625rem] text-sage">
+                <p className="eyebrow pb-1.5 text-[0.5625rem] text-sage-deep">
                   {site.founder.role}
                 </p>
               </div>

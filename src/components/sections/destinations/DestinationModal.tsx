@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { ArrowRight, Clock, Sparkles, Sun, X } from "lucide-react";
 import { useEffect, useRef } from "react";
 import CinematicMedia from "@/components/ui/Media";
@@ -83,8 +83,8 @@ export default function DestinationModal({
       >
         {/* -------------------------------------------------- header bar */}
         <div className="sticky top-0 z-20 flex items-center justify-between border-b border-beige/70 bg-ivory/85 px-6 py-4 backdrop-blur-xl md:px-10">
-          <p className="eyebrow flex items-center gap-3 text-[0.625rem] text-sage">
-            <span className="text-gold">{destination.index}</span>
+          <p className="eyebrow flex items-center gap-3 text-[0.625rem] text-sage-deep">
+            <span className="text-gold-deep">{destination.index}</span>
             {destination.country}
           </p>
           <button
@@ -123,7 +123,7 @@ export default function DestinationModal({
               transition={{ duration: 0.9, ease: EASE, delay: 0.25 }}
             >
               <h2 className="display-md text-navy">{destination.title}</h2>
-              <p className="mt-5 font-serif text-xl italic leading-relaxed text-sage">
+              <p className="mt-5 font-serif text-xl italic leading-relaxed text-sage-deep">
                 {destination.feeling}
               </p>
               <p className="body-copy mt-8 max-w-[52ch] text-charcoal/75">
@@ -136,9 +136,9 @@ export default function DestinationModal({
                     key={key}
                     className="flex items-baseline gap-5 border-b border-beige py-5"
                   >
-                    <dt className="flex min-w-[13rem] items-center gap-3 eyebrow text-[0.5625rem] text-sage">
+                    <dt className="flex min-w-[13rem] items-center gap-3 eyebrow text-[0.5625rem] text-sage-deep">
                       <Icon
-                        className="h-3.5 w-3.5 text-gold"
+                        className="h-3.5 w-3.5 text-gold-deep"
                         strokeWidth={1.25}
                         aria-hidden="true"
                       />

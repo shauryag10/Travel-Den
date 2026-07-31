@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { X } from "lucide-react";
 import { useEffect, useRef } from "react";
 import Logo from "@/components/brand/Logo";
@@ -74,7 +74,7 @@ export default function MobileMenu({
             type="button"
             onClick={onClose}
             aria-label="Close menu"
-            className="inline-flex items-center gap-2.5 p-2"
+            className="-mr-2 inline-flex min-h-11 items-center gap-2.5 p-2"
           >
             <span className="eyebrow text-[0.625rem]">Close</span>
             <X className="h-5 w-5" strokeWidth={1.25} aria-hidden="true" />
@@ -105,7 +105,7 @@ export default function MobileMenu({
                   >
                     <span
                       className={`eyebrow text-[0.5625rem] ${
-                        isActive ? "text-gold" : "text-bluegrey/60"
+                        isActive ? "text-gold" : "text-bluegrey/75"
                       }`}
                     >
                       0{i + 1}

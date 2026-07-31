@@ -1,4 +1,4 @@
-import type { Variants, Transition } from "framer-motion";
+import type { Variants, Transition } from "motion/react";
 
 /**
  * One easing curve and three duration bands for the whole site, so every

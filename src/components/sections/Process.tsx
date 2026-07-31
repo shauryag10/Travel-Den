@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import { Minus, Plus } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import CinematicMedia from "@/components/ui/Media";
@@ -112,7 +112,7 @@ export default function Process() {
 
                 <div
                   aria-hidden="true"
-                  className="absolute inset-0 bg-gradient-to-t from-navy-deep/45 to-transparent"
+                  className="absolute inset-0 bg-gradient-to-t from-navy-deep/70 via-navy-deep/10 to-transparent"
                 />
 
                 <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-6">
@@ -163,7 +163,7 @@ export default function Process() {
                       className="flex w-full items-center justify-between gap-6 py-6 text-left"
                     >
                       <span className="flex items-baseline gap-5">
-                        <span className="eyebrow text-[0.5625rem] text-gold">
+                        <span className="eyebrow text-[0.5625rem] text-gold-deep">
                           {step.number}
                         </span>
                         <span className="font-serif text-[1.8rem] leading-none text-navy">
@@ -172,13 +172,13 @@ export default function Process() {
                       </span>
                       {isOpen ? (
                         <Minus
-                          className="h-4 w-4 shrink-0 text-sage"
+                          className="h-4 w-4 shrink-0 text-sage-deep"
                           strokeWidth={1.25}
                           aria-hidden="true"
                         />
                       ) : (
                         <Plus
-                          className="h-4 w-4 shrink-0 text-sage"
+                          className="h-4 w-4 shrink-0 text-sage-deep"
                           strokeWidth={1.25}
                           aria-hidden="true"
                         />
@@ -243,7 +243,7 @@ function StepRow({
           isActive ? "opacity-100" : "opacity-40"
         }`}
       >
-        <p className="eyebrow text-[0.5625rem] text-sage">{step.number}</p>
+        <p className="eyebrow text-[0.5625rem] text-sage-deep">{step.number}</p>
         <h3 className="mt-4 font-serif text-[2.4rem] leading-none text-navy xl:text-[3rem]">
           {step.title}
         </h3>

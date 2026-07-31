@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import { useState } from "react";
 import PillarIcon from "@/components/ui/PillarIcon";
@@ -134,7 +134,7 @@ export default function Philosophy() {
         </ul>
 
         {/* Swipe affordance, mobile only */}
-        <p className="eyebrow mt-8 text-center text-[0.5rem] text-bluegrey/50 md:hidden">
+        <p className="eyebrow mt-8 text-center text-[0.5rem] text-bluegrey/70 md:hidden">
           Swipe to explore
         </p>
       </div>
